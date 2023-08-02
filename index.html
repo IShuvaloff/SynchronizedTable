@@ -8,7 +8,7 @@
   <title>Сайт</title>
 
   <link rel="stylesheet" href="css/style.css">
-  
+
   <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
   <script type="module" src="js/index.js"></script>
 </head>
@@ -18,20 +18,25 @@
   <main class="container">
     <h1 class="title">Таблица с данными</h1>
     <button class="btn btn__reload" id="reload-data">Обновить</button>
-    <table class="table">
-      <thead class="table__header">
-        <tr class="row row-header table__row">
-          <th class="cell cell-header table__cell cell--id">ID</th>
-          <th class="cell cell-header table__cell cell--firstname">Имя</th>
-          <th class="cell cell-header table__cell cell--lastname">Фамилия</th>
-          <th class="cell cell-header table__cell cell--email">E-Mail</th>
-          <th class="cell cell-header table__cell cell--phone">Телефон</th>
-        </tr>
-      </thead>
-      <tbody class="table__body" id="table-data">
-
-      </tbody>
-    </table>
+    <div class="table-wrapper">
+      <table class="table">
+        <thead class="table__header">
+          <tr class="row row-header table__row">
+            <th class="cell cell-header table__cell cell--id">ID</th>
+            <th class="cell cell-header table__cell cell--firstname">Имя</th>
+            <th class="cell cell-header table__cell cell--lastname">Фамилия</th>
+            <th class="cell cell-header table__cell cell--email">E-Mail</th>
+            <th class="cell cell-header table__cell cell--phone">Телефон</th>
+          </tr>
+        </thead>
+        <tbody class="table__body" id="table-data"></tbody>
+      </table>
+      <div class="pagination" id="pagination">
+        <button class="btn btn__page pagination__prev">Назад</button>
+        <p class="pagination__text">Страница <span class="pagination__text--current">1</span> из <span class="pagination__text--count">1</span></p>
+        <button class="btn btn__page pagination__next">Вперед</button>
+      </div>
+    </div>
   </main>
 
 </body>

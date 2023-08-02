@@ -22,7 +22,7 @@ function createCell(text) {
   const cell = document.createElement('td');
   cell.classList.add('cell', 'cell-body', 'table__cell');
   cell.textContent = text.trim();
-  
+
   return cell;
 }
 

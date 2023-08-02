@@ -1,2 +1,43 @@
 @import url(./normalize.css);
-/* @import url(./reset.css); */
+@import url(./reset.css);
+
+/* базовое */
+.btn {
+  padding: 5px 10px;
+  border: 1px solid black;
+  border-radius: 3px;
+}
+.btn:focus:not(:disabled) {
+  background-color: rgb(230, 230, 230);
+}
+.btn:hover:not(:disabled) {
+  background-color: lightgrey
+}
+.btn:disabled {
+  border-color: grey;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 700px;
+  width: 100%;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* таблица */
+.table-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+/* пагинация */
+.pagination {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}

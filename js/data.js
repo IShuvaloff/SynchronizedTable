@@ -13,13 +13,20 @@ export let dataLoaded = {
 
   get(page) {
     if (!page) return this._records; // если страниц нет
-    
+
     let firstRecordIndex = getFirstRecordIndex(page);
     let lastRecordIndex = getLastRecordIndex(page)
 
     return this._records.filter((_value, index) => {
       return index >= firstRecordIndex && index <= lastRecordIndex;
     });
+  },
+  getCount() {
+    return this._records.length;
+  },
+
+  getPagesCount() {
+    return Math.ceil(this.getCount() / PAGE_RECORDS_COUNT);
   }
 }
 
