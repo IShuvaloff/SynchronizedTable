@@ -1,4 +1,4 @@
-import { checkArray } from "./utils.js";
+import { checkArray, checkSort } from "./utils.js";
 import { PAGE_RECORDS_COUNT } from './constants.js';
 
 export let dataLoaded = {
@@ -7,7 +7,9 @@ export let dataLoaded = {
   set(data) {
     if (!checkArray(data)) return false;
 
+    this.sortClear();
     this._records = data;
+
     return true;
   },
 
@@ -27,6 +29,57 @@ export let dataLoaded = {
 
   getPagesCount() {
     return Math.ceil(this.getCount() / PAGE_RECORDS_COUNT);
+  },
+
+  _sort: {
+    fieldName: '',
+    direction: 0,
+  },
+
+  sort(fieldName, { doAfter }) {
+    if (!checkSort(fieldName)) return;
+
+    const fieldChanged = this._sort.fieldName !== fieldName;
+    this._sort.fieldName = fieldName;
+
+    if (fieldChanged) {
+      this._sort.direction = 1;
+    } else {
+      switch (this._sort.direction) {
+        case -1: this._sort.direction = 1; break;
+        case 0: this._sort.direction = 1; break;
+        case 1: this._sort.direction = -1; break;
+        default: ;
+      }
+    }
+
+    this._records.sort((a, b) => {
+      let valueA, valueB;
+      const reverse = this._sort.direction;
+
+      switch (this._sort.fieldName) {
+        case 'id':
+          valueA = parseInt(a.id);
+          valueB = parseInt(b.id);
+          break;
+        default:
+          valueA = a[fieldName];
+          valueB = b[fieldName];
+      }
+
+      return reverse * ((valueA > valueB) - (valueB > valueA));
+    })
+
+    if (doAfter) doAfter(this._sort);
+  },
+
+  getSort() {
+    return this._sort;
+  },
+
+  sortClear() {
+    this._sort.fieldName = '';
+    this._sort.direction = 0;
   }
 }
 

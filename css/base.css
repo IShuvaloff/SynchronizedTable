@@ -1,0 +1,54 @@
+.btn {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  margin-bottom: 20px;
+  border: 1px solid black;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.btn:focus:not(:disabled) {
+  background-color: #ebebeb;
+}
+.btn:hover:not(:disabled) {
+  background-color: #ebebeb
+}
+.btn:active:not(:disabled) {
+  background-color: lightgrey;
+}
+.btn:disabled {
+  border-color: lightgrey;
+}
+
+.btn__icon {
+  margin-right: 5px;
+  background: url(../img/icons/icon-reload.png) center center / contain;
+  width: 20px;
+  height: 20px;
+  opacity: 100%;
+  transition: opacity .2s ease-in-out, animation .2s ease-in-out;
+  animation: rotation infinite 1.5s linear;
+  animation-play-state: paused;
+}
+.btn__icon--rotating {
+  opacity: 50%;
+  animation-play-state: running;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 20px 10px;
+  max-width: 700px;
+  width: 100%;
+}
+
+.hidden {
+  display: none !important;
+}
+.invisible {
+  visibility: hidden !important;
+}
+
+.title {
+  margin-bottom: 20px;
+}

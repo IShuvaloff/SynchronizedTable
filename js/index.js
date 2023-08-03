@@ -3,10 +3,11 @@ import { dataLoaded } from './data.js';
 import { updatePagination } from './pagination.js';
 import { updateTable } from './table.js';
 import { getCurrentPage } from './pagination.js';
+import { updateTableHeader } from './sort.js';
 
 function reloadData(e) {
   e.preventDefault();
-  loadData(saveData);
+  loadData({ doAfter: saveData });
 }
 
 function openPagePrev(e) {
@@ -29,16 +30,27 @@ function openPageNext(e) {
   updatePagination(newPage, dataLoaded.getPagesCount());
 }
 
+function sort(e) {
+  e.preventDefault();
+
+  const id = e.currentTarget.dataset.id;
+  if (!id) return;
+
+  dataLoaded.sort(id, {
+    doAfter: (sortData) => {
+      const page = 1;
+      updateTable(dataLoaded.get(page));
+      updateTableHeader(sortData);
+      updatePagination(page, dataLoaded.getPagesCount());
+    }
+  });
+}
+
 function saveData(data) {
   const page = 1;
-
-  // 1. сохранить данные
   dataLoaded.set(data);
-
-  // 2. обновить таблицу
   updateTable(dataLoaded.get(page));
-
-  // 3. обновить пагинацию
+  updateTableHeader(dataLoaded.getSort());
   updatePagination(page, dataLoaded.getPagesCount());
 }
 
@@ -46,6 +58,7 @@ function saveData(data) {
 document.getElementById('reload-data').addEventListener('click', reloadData);
 document.querySelector('.pagination__prev').addEventListener('click', openPagePrev);
 document.querySelector('.pagination__next').addEventListener('click', openPageNext);
+document.querySelectorAll('.cell-header').forEach((item) => item.addEventListener('click', sort));
 
 // ? загрузка данных
-loadData(saveData);
+loadData({ doAfter: saveData });

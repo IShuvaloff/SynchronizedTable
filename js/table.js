@@ -18,9 +18,9 @@ export function updateTable(data) {
   return true;
 }
 
-function createCell(text) {
+function createCell(text, fieldName) {
   const cell = document.createElement('td');
-  cell.classList.add('cell', 'cell-body', 'table__cell');
+  cell.classList.add('cell', 'cell-body', 'table__cell', `cell-body--${fieldName}`);
   cell.textContent = text.trim();
 
   return cell;
@@ -30,11 +30,12 @@ function createRow(dataObj) {
   if (!checkObject(dataObj)) return '';
   const row = document.createElement('tr');
   row.classList.add('row', 'row-body', 'table__row');
+  // row.tabIndex = '0';
 
   FIELD_NAMES.forEach((item) => {
     const field = dataObj[item];
-    if (!field) return;
-    row.appendChild(createCell(String(field)));
+    // if (!field) return;
+    row.appendChild(createCell(String(field), item));
   });
 
   return row;

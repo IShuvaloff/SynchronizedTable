@@ -1,38 +1,74 @@
 @import url(./normalize.css);
 @import url(./reset.css);
-
-/* базовое */
-.btn {
-  padding: 5px 10px;
-  border: 1px solid black;
-  border-radius: 3px;
-}
-.btn:focus:not(:disabled) {
-  background-color: rgb(230, 230, 230);
-}
-.btn:hover:not(:disabled) {
-  background-color: lightgrey
-}
-.btn:disabled {
-  border-color: grey;
-}
-
-.container {
-  margin: 0 auto;
-  max-width: 700px;
-  width: 100%;
-}
-
-.hidden {
-  display: none !important;
-}
+@import url(./animations.css);
+@import url(./base.css);
 
 /* таблица */
 .table-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  margin-bottom: 20px;
   width: 100%;
+}
+
+.table {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.row-header {
+  height: 40px;
+}
+
+.row-body {
+  cursor: pointer;
+}
+
+.row-body:focus {
+  background-color: #ebebeb;
+}
+
+.row-body:hover {
+  background-color: #ebebeb;
+}
+
+.row-body:active {
+  background-color: lightgrey;
+}
+
+.cell {
+  padding: 2px 5px;
+  border: 1px solid lightgrey;
+}
+.cell__text {
+
+}
+.cell__icon {
+  background: url(../img/icons/icon-down.png) center center / contain;
+  width: 10px;
+  height: 10px;
+  opacity: 100%;
+  transform: rotate(180deg);
+  transition: transform .3s ease-in-out;
+}
+.cell__icon--reversed {
+  transform: rotate(360deg);
+}
+
+.cell-header:hover {
+  background-color: #ebebeb
+}
+
+.cell-header__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+.cell-body--id {
+  text-align: right;
 }
 
 /* пагинация */
@@ -41,3 +77,8 @@
   justify-content: space-evenly;
   align-items: center;
 }
+
+.pagination__btn {
+  margin-bottom: 0;
+}
+

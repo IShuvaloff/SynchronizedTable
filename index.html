@@ -17,24 +17,52 @@
 
   <main class="container">
     <h1 class="title">Таблица с данными</h1>
-    <button class="btn btn__reload" id="reload-data">Обновить</button>
+    <button class="btn btn__reload" id="reload-data">
+      <div class="btn__icon"></div>
+      <span class="btn__text">Обновить</span>
+    </button>
     <div class="table-wrapper">
       <table class="table">
         <thead class="table__header">
           <tr class="row row-header table__row">
-            <th class="cell cell-header table__cell cell--id">ID</th>
-            <th class="cell cell-header table__cell cell--firstname">Имя</th>
-            <th class="cell cell-header table__cell cell--lastname">Фамилия</th>
-            <th class="cell cell-header table__cell cell--email">E-Mail</th>
-            <th class="cell cell-header table__cell cell--phone">Телефон</th>
+            <th class="cell cell-header table__cell cell-header--id" data-id="id">
+              <div class="cell-header__wrapper">
+                <span class="cell__text">ID</span>
+                <div class="cell__icon icon-sort invisible"></div>
+              </div>
+            </th>
+            <th class="cell cell-header table__cell cell-header--firstname" data-id="firstName">
+              <div class="cell-header__wrapper">
+                <span class="cell__text">Имя</span>
+                <div class="cell__icon icon-sort invisible"></div>
+              </div>
+            </th>
+            <th class="cell cell-header table__cell cell-header--lastname" data-id="lastName">
+              <div class="cell-header__wrapper">
+                <span class="cell__text">Фамилия</span>
+                <div class="cell__icon icon-sort invisible"></div>
+              </div>
+            </th>
+            <th class="cell cell-header table__cell cell-header--email" data-id="email">
+              <div class="cell-header__wrapper">
+                <span class="cell__text">E-Mail</span>
+                <div class="cell__icon icon-sort invisible"></div>
+              </div>
+            </th>
+            <th class="cell cell-header table__cell cell-header--phone" data-id="phone">
+              <div class="cell-header__wrapper">
+                <span class="cell__text">Телефон</span>
+                <div class="cell__icon icon-sort invisible"></div>
+              </div>
+            </th>
           </tr>
         </thead>
         <tbody class="table__body" id="table-data"></tbody>
       </table>
       <div class="pagination" id="pagination">
-        <button class="btn btn__page pagination__prev">Назад</button>
+        <button class="btn btn__page pagination__btn pagination__prev">Назад</button>
         <p class="pagination__text">Страница <span class="pagination__text--current">1</span> из <span class="pagination__text--count">1</span></p>
-        <button class="btn btn__page pagination__next">Вперед</button>
+        <button class="btn btn__page pagination__btn pagination__next">Вперед</button>
       </div>
     </div>
   </main>
