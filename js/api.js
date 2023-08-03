@@ -1,9 +1,9 @@
-import { startLoading, stopLoading } from './loading.js';
+import { startLoading, stopLoading } from './view/loading.js';
 
 const url =
   'http://www.filltext.com/?id={number|1000}&firstName={firstName}&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&address={addressObject}&description={lorem|32}';
 
-const recordsMax = 34;
+const recordsMax = 32;
 
 export function loadData({doBefore, doAfter}) {
   startLoading();

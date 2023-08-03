@@ -61,13 +61,12 @@ export let dataLoaded = {
         case 'id':
           valueA = parseInt(a.id);
           valueB = parseInt(b.id);
-          break;
+          return reverse * ((valueA > valueB) - (valueB > valueA));
         default:
-          valueA = a[fieldName];
-          valueB = b[fieldName];
+          valueA = String(a[fieldName]);
+          valueB = String(b[fieldName]);
+          return reverse * ((valueA.localeCompare(valueB)) - (valueB.localeCompare(valueA)));
       }
-
-      return reverse * ((valueA > valueB) - (valueB > valueA));
     })
 
     if (doAfter) doAfter(this._sort);

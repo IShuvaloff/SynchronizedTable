@@ -1,9 +1,9 @@
 import { loadData } from './api.js';
 import { dataLoaded } from './data.js';
-import { updatePagination } from './pagination.js';
-import { updateTable } from './table.js';
-import { getCurrentPage } from './pagination.js';
-import { updateTableHeader } from './sort.js';
+import { updatePagination } from './view/pagination.js';
+import { updateTable } from './view/table.js';
+import { getCurrentPage } from './view/pagination.js';
+import { updateTableHeader } from './view/sort.js';
 
 function reloadData(e) {
   e.preventDefault();

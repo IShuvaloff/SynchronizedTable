@@ -18,6 +18,7 @@
 }
 .btn:disabled {
   border-color: lightgrey;
+  cursor: auto;
 }
 
 .btn__icon {
@@ -42,13 +43,13 @@
   width: 100%;
 }
 
+.title {
+  margin-bottom: 20px;
+}
+
 .hidden {
   display: none !important;
 }
 .invisible {
   visibility: hidden !important;
-}
-
-.title {
-  margin-bottom: 20px;
 }

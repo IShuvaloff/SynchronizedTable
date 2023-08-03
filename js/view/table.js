@@ -1,5 +1,5 @@
-import { FIELD_NAMES } from './constants.js';
-import { checkArray, checkObject } from './utils.js';
+import { FIELD_NAMES } from '../constants.js';
+import { checkArray, checkObject } from '../utils.js';
 
 const elementTable = document.getElementById('table-data');
 
