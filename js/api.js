@@ -1,3 +1,4 @@
+import { clearError, updateError } from './view/errors.js';
 import { startLoading, stopLoading } from './view/loading.js';
 
 const url =
@@ -6,24 +7,32 @@ const url =
 const recordsMax = 32;
 
 export function loadData({doBefore, doAfter}) {
-  startLoading();
+  startLoading({ doBefore: clearError });
   if (doBefore) doBefore();
 
-  return axios
-    .get(url, {
-      params: {
-        rows: recordsMax,
-      },
-    })
-    .then((response) => {
-      if (response?.data?.length) {
-        if (doAfter) doAfter(response.data);
-      };
-    })
-    .catch((error) => {
-      console.log(error);
-    })
-    .finally(() => {
-      stopLoading();
-    });
+  try {
+    return axios
+      .get(url, {
+        params: {
+          rows: recordsMax,
+        },
+      })
+      .then((response) => {
+        if (response?.data?.length) {
+          if (doAfter) doAfter(response.data);
+        };
+      })
+      .catch((error) => {
+        updateError(error, { doAfter: stopLoading });
+      })
+      .finally(() => {
+        stopLoading();
+      });
+
+  } catch(e) {
+    // отлов ошибок загрузки axios
+    setTimeout(() => {
+      updateError(e, { doAfter: stopLoading });
+    }, 500);
+  }
 }

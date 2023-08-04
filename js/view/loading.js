@@ -1,7 +1,8 @@
 const btnReload = document.querySelector('.btn__reload');
 const btnIcon = document.querySelector('.btn__icon');
 
-export function startLoading() {
+export function startLoading({ doBefore }) {
+  if (doBefore) doBefore();
   updateReloadBtn(false);
   btnIcon?.classList.add('btn__icon--rotating');
 }

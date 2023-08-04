@@ -62,3 +62,4 @@ document.querySelectorAll('.cell-header').forEach((item) => item.addEventListene
 
 // ? загрузка данных
 loadData({ doAfter: saveData });
+
