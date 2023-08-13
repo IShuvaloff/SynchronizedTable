@@ -1,30 +1,38 @@
-import { checkArray, checkSort } from "./utils.js";
+import { checkArray, checkSort, getFirstRecordIndex, getLastRecordIndex } from "./utils.js";
 import { PAGE_RECORDS_COUNT } from './constants.js';
 
 export let dataLoaded = {
   _records: [],
+  _recordsFiltered: [],
+
+  setRecords(data) {
+    this._records = data;
+    this.updateRecords();
+  },
+  updateRecords() {
+    this.updateFilter();
+    this.updateSort();
+  },
 
   set(data) {
     if (!checkArray(data)) return false;
-
-    this.sortClear();
-    this._records = data;
-
+    this.setRecords(data);
     return true;
   },
 
   get(page) {
-    if (!page) return this._records; // если страниц нет
+    if (!page) return this._recordsFiltered; // если страниц нет
 
     let firstRecordIndex = getFirstRecordIndex(page);
     let lastRecordIndex = getLastRecordIndex(page)
 
-    return this._records.filter((_value, index) => {
+    return this._recordsFiltered.filter((_value, index) => {
       return index >= firstRecordIndex && index <= lastRecordIndex;
     });
   },
+
   getCount() {
-    return this._records.length;
+    return this._recordsFiltered.length;
   },
 
   getPagesCount() {
@@ -53,7 +61,17 @@ export let dataLoaded = {
       }
     }
 
-    this._records.sort((a, b) => {
+    this.updateRecords();
+
+    if (doAfter) doAfter(this._sort);
+  },
+
+  getSort() {
+    return this._sort;
+  },
+
+  updateSort() {
+    this._recordsFiltered.sort((a, b) => {
       let valueA, valueB;
       const reverse = this._sort.direction;
 
@@ -63,31 +81,40 @@ export let dataLoaded = {
           valueB = parseInt(b.id);
           return reverse * ((valueA > valueB) - (valueB > valueA));
         default:
-          valueA = String(a[fieldName]);
-          valueB = String(b[fieldName]);
+          valueA = String(a[this._sort.fieldName]);
+          valueB = String(b[this._sort.fieldName]);
           return reverse * ((valueA.localeCompare(valueB)) - (valueB.localeCompare(valueA)));
       }
-    })
-
-    if (doAfter) doAfter(this._sort);
+    });
   },
 
-  getSort() {
-    return this._sort;
+  _filter: '',
+
+  getFilter() {
+    return this._filter;
   },
 
-  sortClear() {
-    this._sort.fieldName = '';
-    this._sort.direction = 0;
-  }
-}
+  filter(text) {
+    const newFilter = text?.trim()?.toLowerCase() ?? '';
+    if (this._filter === newFilter) return false;
 
-function getFirstRecordIndex(page) {
-  const firstRecordIndex = (page - 1) * PAGE_RECORDS_COUNT;
-  return Math.max(firstRecordIndex, 0);
-}
+    this._filter = newFilter;
+    this.updateRecords();
 
-function getLastRecordIndex(page) {
-  const lastRecordIndex = page * PAGE_RECORDS_COUNT - 1;
-  return Math.max(lastRecordIndex, 0);
+    return true;
+  },
+
+  updateFilter() {
+    if (this._filter === '') {
+      this._recordsFiltered = this._records;
+    } else {
+      this._recordsFiltered = this._records.filter((value) => {
+        return value.firstName.trim().toLowerCase().includes(this._filter) ||
+          value.lastName.trim().toLowerCase().includes(this._filter) ||
+          String(value.id).trim().toLowerCase().includes(this._filter) ||
+          value.phone.trim().toLowerCase().includes(this._filter) ||
+          value.email.trim().toLowerCase().includes(this._filter);
+      });
+    }
+  },
 }

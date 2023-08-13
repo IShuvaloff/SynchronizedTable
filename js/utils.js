@@ -1,7 +1,7 @@
-import { FIELD_NAMES } from "./constants.js";
+import { FIELD_NAMES, PAGE_RECORDS_COUNT } from "./constants.js";
 
 export function checkArray(arr) {
-  return arr && Array.isArray(arr) && arr.length;
+  return arr && Array.isArray(arr);
 }
 
 export function checkObject(obj) {
@@ -9,7 +9,7 @@ export function checkObject(obj) {
 }
 
 export function checkSort(fieldName) {
-  return FIELD_NAMES.includes(fieldName?.trim()); // && [-1, 0, 1].includes(direction);
+  return FIELD_NAMES.includes(fieldName?.trim());
 }
 
 export function getErrorByStatus(error) {
@@ -27,4 +27,14 @@ export function getErrorByStatus(error) {
     case 502: return `Ошибка 503: Сервер временно недоступен`;
     default: return `Ошибка ${error.status}: ${error.statusText}`;
   }
+}
+
+export function getFirstRecordIndex(page) {
+  const firstRecordIndex = (page - 1) * PAGE_RECORDS_COUNT;
+  return Math.max(firstRecordIndex, 0);
+}
+
+export function getLastRecordIndex(page) {
+  const lastRecordIndex = page * PAGE_RECORDS_COUNT - 1;
+  return Math.max(lastRecordIndex, 0);
 }

@@ -1,0 +1,12 @@
+.filter {
+  margin-bottom: 5px;
+  padding: 2px 5px;
+  border: 1px solid grey;
+  width: 100%;
+  color: grey;
+  font-style: italic;
+  line-height: normal;
+}
+.filter::placeholder {
+  color: lightgrey;
+}
