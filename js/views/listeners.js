@@ -2,10 +2,14 @@ import { loadData } from "../api.js";
 import { dataLoaded } from "../data.js";
 import { getCurrentPage } from "./pagination.js";
 import updateView from "./views.js";
+import { setInfoVisible } from './info.js';
+import { updateRowClicked } from "./table.js";
 
 function reloadData(e) {
   e.preventDefault();
   loadData({ doAfter: saveData });
+  setInfoVisible(false);
+  updateRowClicked();
 }
 
 function openPagePrev(e) {
@@ -14,6 +18,7 @@ function openPagePrev(e) {
   if (currentPage === 1) return;
 
   updateView(currentPage - 1);
+  // setInfoPanelVisible(false);
 }
 
 function openPageNext(e) {
@@ -22,6 +27,7 @@ function openPageNext(e) {
   if (currentPage === dataLoaded.getPagesCount()) return;
 
   updateView(currentPage + 1);
+  // setInfoPanelVisible(false);
 }
 
 function sort(e) {

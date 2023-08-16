@@ -1,5 +1,6 @@
 import { FIELD_NAMES } from '../constants.js';
 import { checkArray, checkObject } from '../utils.js';
+import { showInfo } from './info.js';
 
 const elementTable = document.getElementById('table-data');
 
@@ -13,6 +14,8 @@ export function updateTable(data) {
     const row = createRow(item);
     if (!row) return;
     elementTable.appendChild(row);
+
+    row.addEventListener('click', showInfo);
   });
 
   return true;
@@ -39,4 +42,12 @@ function createRow(dataObj) {
   });
 
   return row;
+}
+
+export function updateRowClicked(row) {
+  document.querySelectorAll('.row-body--chosen').forEach((row) => {
+    row.classList.remove('row-body--chosen');
+  });
+
+  row?.classList.add('row-body--chosen');
 }

@@ -1,7 +1,7 @@
 import { loadData } from './api.js';
 import { dataLoaded } from './data.js';
-import addEventListeners from './view/dom.js';
-import updateView from './view/views.js';
+import addEventListeners from './views/listeners.js';
+import updateView from './views/views.js';
 
 function saveData(data) {
   dataLoaded.set(data);

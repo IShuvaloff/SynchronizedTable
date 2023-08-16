@@ -31,6 +31,10 @@
   background-color: lightgrey;
 }
 
+.row-body--chosen {
+  background-color: #ebebeb;
+}
+
 .cell {
   padding: 2px 5px;
   border: 1px solid lightgrey;

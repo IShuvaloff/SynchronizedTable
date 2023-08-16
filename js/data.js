@@ -6,7 +6,9 @@ export let dataLoaded = {
   _recordsFiltered: [],
 
   setRecords(data) {
-    this._records = data;
+    this._records = data.map((value) => {
+      return {...value, user: [value.firstName, value.lastName].join(' ')};
+    });
     this.updateRecords();
   },
   updateRecords() {
@@ -29,6 +31,11 @@ export let dataLoaded = {
     return this._recordsFiltered.filter((_value, index) => {
       return index >= firstRecordIndex && index <= lastRecordIndex;
     });
+  },
+
+  getById(id) {
+    if (!id) return;
+    return this._recordsFiltered.find((value) => value.id == id);
   },
 
   getCount() {

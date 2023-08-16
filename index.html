@@ -17,6 +17,7 @@
 
   <main class="container">
     <h1 class="title">Таблица с данными</h1>
+
     <div class="reloading">
       <button class="btn btn__reload reloading__btn" id="reload-data">
         <div class="btn__icon"></div>
@@ -24,7 +25,9 @@
       </button>
       <p class="error reloading__error"></p>
     </div>
+
     <input type="text" class="filter" placeholder="Найти...">
+
     <div class="table-wrapper">
       <table class="table">
         <thead class="table__header">
@@ -65,8 +68,36 @@
       </table>
       <div class="pagination" id="pagination">
         <button class="btn btn__page pagination__btn pagination__prev">Назад</button>
-        <p class="pagination__text">Страница <span class="pagination__text--current">1</span> из <span class="pagination__text--count">1</span></p>
+        <p class="pagination__text">Страница <span class="pagination__text--current">1</span> из <span
+            class="pagination__text--count">1</span></p>
         <button class="btn btn__page pagination__btn pagination__next">Вперед</button>
+      </div>
+    </div>
+
+    <div class="info">
+      <div class="info__record">
+        <div class="info__key info__key--user">Выбран пользователь:</div>
+        <div class="info__value info__value--user"></div>
+      </div>
+      <div class="info__record">
+        <div class="info__key info__key--description">Описание:</div>
+        <div class="info__value info__value--description"></div>
+      </div>
+      <div class="info__record">
+        <div class="info__key info__key--streetaddress">Адрес проживания:</div>
+        <div class="info__value info__value--streetaddress"></div>
+      </div>
+      <div class="info__record">
+        <div class="info__key info__key--city">Город:</div>
+        <div class="info__value info__value--city"></div>
+      </div>
+      <div class="info__record">
+        <div class="info__key info__key--state">Провинция/штат:</div>
+        <div class="info__value info__value--state"></div>
+      </div>
+      <div class="info__record">
+        <div class="info__key info__key--zip">Индекс:</div>
+        <div class="info__value info__value--zip"></div>
       </div>
     </div>
   </main>

@@ -1,10 +1,9 @@
-import { clearError, updateError } from './view/errors.js';
-import { startLoading, stopLoading } from './view/loading.js';
+import { MAX_RECORDS_LOADING } from './constants.js';
+import { clearError, updateError } from './views/errors.js';
+import { startLoading, stopLoading } from './views/loading.js';
 
 const url =
   'http://www.filltext.com/?id={number|1000}&firstName={firstName}&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&address={addressObject}&description={lorem|32}';
-
-const recordsMax = 32;
 
 export function loadData({doBefore, doAfter}) {
   startLoading({ doBefore: clearError });
@@ -14,7 +13,7 @@ export function loadData({doBefore, doAfter}) {
     return axios
       .get(url, {
         params: {
-          rows: recordsMax,
+          rows: MAX_RECORDS_LOADING,
         },
       })
       .then((response) => {
